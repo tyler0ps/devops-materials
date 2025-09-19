@@ -2,6 +2,9 @@
 helm pull prometheus-community/kube-prometheus-stack --version 77.9.1
 tar -xzf kube-prometheus-stack-77.9.1.tgz
 
+# Enable ingress
+minikube addons enable ingress
+
 # Create secret to stores grafana user
 kubectl apply -f namespace.yaml
 kubectl create secret generic grafana-admin-user-sec -n monitoring --from-literal admin-user=admin --from-literal admin-password=devops123

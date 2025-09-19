@@ -1,7 +1,13 @@
 grafana:
-  # adminUser: admin
-  # adminPassword: strongpassword
   admin:
     existingSecret: "grafana-admin-user-sec"
     userKey: admin-user
     passwordKey: admin-password
+  # service:
+  #   type: NodePort
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    hosts:
+      - grafana.oceancloud.local
+    path: /

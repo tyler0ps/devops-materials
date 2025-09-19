@@ -3,6 +3,7 @@ grafana:
     existingSecret: "grafana-admin-user-sec"
     userKey: admin-user
     passwordKey: admin-password
+  # Optional, to expose service as NodePort.
   # service:
   #   type: NodePort
   ingress:

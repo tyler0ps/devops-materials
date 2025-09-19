@@ -14,3 +14,12 @@ helm install prometheus-stack ./kube-prometheus-stack -f values.tyler.yaml -n mo
 
 # Upgrade charts after changing some values or configurations
 helm upgrade prometheus-stack ./kube-prometheus-stack -n monitoring -f values.tyler.yaml
+
+# To test locally with minikube
+minikube tunnel
+
+Add to /etc/hosts
+127.0.0.1 grafana.oceancloud.local
+
+curl http://grafana.oceancloud.local -v
+Or, open http://grafana.oceancloud.local from browser

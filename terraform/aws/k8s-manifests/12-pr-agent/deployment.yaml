@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pr-agent
+  namespace: pr-agent
+  labels:
+    app: pr-agent
+    app.kubernetes.io/instance: pr-agent
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pr-agent
+  template:
+    metadata:
+      labels:
+        app: pr-agent
+        app.kubernetes.io/instance: pr-agent
+    spec:
+      containers:
+        - name: pr-agent
+          image: 535002848241.dkr.ecr.ap-southeast-1.amazonaws.com/pr_agent:94a0b82
+          ports:
+            - containerPort: 8000
+          env:
+            - name: OPENSEARCH_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: pr-agent-secret
+                  key: OPENSEARCH_USERNAME
+            - name: OPENSEARCH_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: pr-agent-secret
+                  key: OPENSEARCH_PASSWORD
+            - name: OPENSEARCH_HOST
+              valueFrom: 
+                configMapKeyRef:
+                  name: pragent-config
+                  key: OPENSEARCH_HOST
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: pr-agent-secret
+                  key: AWS_ACCESS_KEY_ID
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: pr-agent-secret
+                  key: AWS_SECRET_ACCESS_KEY
+            - name: LANGFUSE_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: pr-agent-secret
+                  key: LANGFUSE_SECRET_KEY
+            - name: LANGFUSE_PUBLIC_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: pr-agent-secret
+                  key: LANGFUSE_PUBLIC_KEY
+            - name: LANGFUSE_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: pragent-config
+                  key: LANGFUSE_HOST
+            - name: OPENSEARCH_CA_PATH
+              value: /etc/ssl/certs/rootCA.pem
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "200m"
+              memory: "256Mi"
+          volumeMounts:
+            - name: rootca-config
+              mountPath: /etc/ssl/certs
+              readOnly: true
+      volumes:
+        - name: rootca-config
+          configMap:
+            name: rootca-config

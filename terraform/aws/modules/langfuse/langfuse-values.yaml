@@ -1,0 +1,47 @@
+global:
+  defaultStorageClass: gp3-sc
+
+langfuse:
+  encryptionKey:
+    secretKeyRef:
+      name: langfuse
+      key: encryption-key
+
+  salt:
+    secretKeyRef:
+      name: langfuse
+      key: salt
+
+  nextauth:
+    secret:
+      secretKeyRef:
+        name: langfuse
+        key: nextauth-secret
+  
+  features:
+    signUpDisabled: true
+
+postgresql:
+  auth:
+    existingSecret: langfuse
+    secretKeys:
+      adminPasswordKey: postgresql-password
+      userPasswordKey: postgresql-password
+
+clickhouse:
+  replicaCount: 1
+  resourcesPreset: medium
+  auth:
+    existingSecret: langfuse
+    existingSecretKey: clickhouse-password
+
+redis:
+  auth:
+    existingSecret: langfuse
+    existingSecretPasswordKey: redis-password
+
+s3:
+  auth:
+    existingSecret: langfuse
+    rootUserSecretKey: s3-user
+    rootPasswordSecretKey: s3-password

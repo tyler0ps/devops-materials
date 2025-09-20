@@ -23,3 +23,17 @@ Add to /etc/hosts
 
 curl http://grafana.oceancloud.local -v
 Or, open http://grafana.oceancloud.local from browser
+
+# Troubleshooting service monitor
+## Check service-monitor has correct configuration
+kubectl get servicemonitors.monitoring.coreos.com -n monitoring prometheus-stack-grafana -o yaml
+kubectl get svc -n monitoring -l app.kubernetes.io/instance=prometheus-stack -l app.kubernetes.io/name=grafana -oyaml
+kubectl run -it --rm client --image=curlimages/curl --restart=Never -- curl http://prometheus-stack-grafana.monitoring:80/metrics
+
+## To check service-monitor has been selected by prometheus
+kubectl -n monitoring get prometheuses.monitoring.coreos.com -oyaml
+    serviceMonitorNamespaceSelector: {} --> All namespaces
+    serviceMonitorSelector:
+      matchLabels:
+        release: prometheus-stack 
+kubectl get servicemonitors.monitoring.coreos.com --all-namespaces -l release=prometheus-stack

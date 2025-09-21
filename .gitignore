@@ -84,6 +84,7 @@ go.work.sum
 # Local helm chart
 kube-prometheus-stack
 kube-prometheus-stack-77.9.1.tgz
+kube-prometheus-0.16.0
 
 # Local certs
 **/ec2-devops.pem

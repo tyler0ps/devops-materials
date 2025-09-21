@@ -8,3 +8,9 @@ helm install ingress-nginx ingress-nginx/ingress-nginx \
     --create-namespace \
     -f nginx-values.yaml
 
+# Test metric endpoint
+kubectl run client \
+    -it --rm \
+    --image=curlimages/curl \
+    --restart=Never \
+    -- curl http://ingress-nginx-controller-metrics.ingress-nginx:10254/metrics

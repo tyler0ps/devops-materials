@@ -37,3 +37,28 @@ kubectl -n monitoring get prometheuses.monitoring.coreos.com -oyaml
       matchLabels:
         release: prometheus-stack 
 kubectl get servicemonitors.monitoring.coreos.com --all-namespaces -l release=prometheus-stack
+
+# No Helm Chart, install from kube-prometheus releases with minikube
+minikube delete && \
+minikube start --container-runtime=containerd \
+--kubernetes-version=v1.32.3 \
+--memory=6g --cpus=4 \
+--bootstrapper=kubeadm \
+--extra-config=kubelet.authentication-token-webhook=true \
+--extra-config=kubelet.authorization-mode=Webhook \
+--extra-config=scheduler.bind-address=0.0.0.0 \
+--extra-config=controller-manager.bind-address=0.0.0.0
+
+minikube addons disable metrics-server
+
+curl -Lo kube-prometheus-0.16.0.zip https://github.com/prometheus-operator/kube-prometheus/archive/refs/tags/v0.16.0.zip && unzip kube-prometheus-0.16.0.zip
+
+KUBE_PROM_PATH='kube-prometheus-0.16.0'
+kubectl apply --server-side -f "$KUBE_PROM_PATH/manifests/setup"
+kubectl wait \
+    --for condition=Established \
+    --all CustomResourceDefinition \
+    --namespace=monitoring
+kubectl apply -f "$KUBE_PROM_PATH/manifests/"
+
+Grafana admin user: admin:admin

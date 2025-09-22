@@ -14,3 +14,6 @@ kubectl run client \
     --image=curlimages/curl \
     --restart=Never \
     -- curl http://ingress-nginx-controller-metrics.ingress-nginx:10254/metrics
+
+# Add cluster role to prometheus service-account to scrape ingress-nginx-controller
+kubectl apply -f prometheus

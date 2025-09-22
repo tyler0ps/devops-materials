@@ -6,7 +6,6 @@ metadata:
   namespace: monitoring
   labels:
     app.kubernetes.io/part-of: kube-prometheus
-    component: main
 spec:
   selector:
     matchLabels:

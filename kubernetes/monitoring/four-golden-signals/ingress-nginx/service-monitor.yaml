@@ -14,4 +14,4 @@ spec:
     matchNames:
     - ingress-nginx
   endpoints:
-  - port: metrics
+    - port: metrics

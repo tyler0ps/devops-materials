@@ -35,3 +35,7 @@ go run .
  
 # Go to prometheus make a query, to test metrics are scraped
 PromQL nginx_ingress_controller_request_duration_seconds_bucket
+
+# Import dashboards
+latency-traffic-errors.json
+saturation.json

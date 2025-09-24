@@ -6,8 +6,8 @@ import (
 )
 
 func main() {
-	general()
-	// generateErrors()
+	go general()
+	generateErrors()
 }
 
 func general() {

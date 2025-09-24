@@ -26,8 +26,8 @@ spec:
           value: release
         resources:
           requests:
-            cpu: 10m
+            cpu: 40m
             memory: 16Mi
           limits:
-            cpu: 20m
+            cpu: 80m
             memory: 32Mi

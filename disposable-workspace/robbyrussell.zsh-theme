@@ -8,7 +8,7 @@ ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[blue]%})"
 
 RPROMPT='$(git_prompt_status)%{$reset_color%}'
 
-# Incompatible with tty, worked on macOS
+# Incompatible with docker exec tty, worked on macOS
 # ZSH_THEME_GIT_PROMPT_ADDED="%{$fg[cyan]%} ✈"
 # ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[yellow]%} ✭"
 # ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[red]%} ✗"

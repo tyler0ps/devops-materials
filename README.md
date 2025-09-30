@@ -4,4 +4,4 @@ A personal library of DevOps building blocks — small, working setups you can r
 
 [TLS nginx](nginx/README.md)
 
-[Disposable Workspace](custom-debian/README.md)
+[Disposable Workspace](disposable-workspace/README.md)

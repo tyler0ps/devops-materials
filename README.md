@@ -3,3 +3,5 @@
 A personal library of DevOps building blocks — small, working setups you can reuse and combine.
 
 [TLS nginx](nginx/README.md)
+
+[Disposable Workspace](custom-debian/README.md)

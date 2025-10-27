@@ -5,3 +5,8 @@ A personal library of DevOps building blocks — small, working setups you can r
 [TLS nginx](nginx/README.md)
 
 [Disposable Workspace](disposable-workspace/README.md)
+
+## speed test
+```bash
+docker run -it --rm tyler0ps/speedtest
+```
